@@ -3,6 +3,7 @@ import CarItem from "./CarItem";
 
 function Car({car}) {
     const {model,price,year,id} = car
+
     return (
         <div>
             <h2>{model}</h2>

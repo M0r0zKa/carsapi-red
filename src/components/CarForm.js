@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setCars} from "../store/CarSlice";
 
 
@@ -9,11 +9,24 @@ function CarForm(props) {
     const {register, handleSubmit, reset, setValue, formState: {errors}} = useForm()
 const dispatch = useDispatch()
 
+    const {newCar} = useSelector(state => state.cars)
+
     const submit = async (data) => {
-        console.log(data);
-        dispatch(setCars(data))
+        if(data.id  !== undefined){
+        await    dispatch(setCars(newCar))
+        }
+       await dispatch(setCars(data))
         reset()
     }
+
+useEffect(()=>{
+    setValue('model',newCar.model)
+    setValue('price',newCar.price)
+    setValue('year',newCar.year)
+
+
+}, [newCar])
+
 
     return (
         <form onSubmit={handleSubmit(submit)}>
@@ -33,7 +46,7 @@ const dispatch = useDispatch()
                     min:1990,
                     max:new Date().getFullYear()
                 })}/>
-<button>Save</button>
+<button>{JSON.stringify(newCar) !== '{}' ? 'Edit' : 'Save'}</button>
         </form>
     );
 }
