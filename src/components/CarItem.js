@@ -1,12 +1,12 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {editCar, removeCar} from "../store/CarSlice";
+import {editCar,deleteCar} from "../store/CarSlice";
 
 function CarItem({car}) {
     const dispatch = useDispatch()
 
-    function deleteCar() {
-        dispatch(removeCar(car.id))
+    function deleteCarFx() {
+        dispatch(deleteCar(car.id))
     }
     function editCarState() {
         dispatch(editCar(car))
@@ -15,7 +15,7 @@ function CarItem({car}) {
 
     return (
         <label>
-            <button onClick={deleteCar}>Del</button>
+            <button onClick={deleteCarFx}>Del</button>
             <button onClick={editCarState}>Edit</button>
         </label>
     );

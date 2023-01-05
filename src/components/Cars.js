@@ -4,12 +4,13 @@ import Car from "./Car";
 
 function Cars(props) {
 
-    const cars = useSelector(state => state.cars.cars)
-
+    const {cars,status,error} = useSelector(state => state.cars)
 
 
     return (
         <div>
+            {status === 'Loading' && <h2>Loading...</h2>}
+            {error && <h2>An error occerd: {error}</h2>}
             {
                 cars.map(car => <Car key={car.id} car={car}/>)
             }

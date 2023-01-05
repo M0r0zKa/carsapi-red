@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
-import {setCars} from "../store/CarSlice";
+import {AddNewCar, setCars} from "../store/CarSlice";
 
 
 function CarForm(props) {
@@ -12,10 +12,7 @@ const dispatch = useDispatch()
     const {newCar} = useSelector(state => state.cars)
 
     const submit = async (data) => {
-        if(data.id  !== undefined){
-        await    dispatch(setCars(newCar))
-        }
-       await dispatch(setCars(data))
+        await dispatch(AddNewCar(data))
         reset()
     }
 
